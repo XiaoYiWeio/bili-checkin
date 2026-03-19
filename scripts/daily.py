@@ -414,8 +414,9 @@ def main():
     )
     parser.add_argument("--sessdata", help="SESSDATA cookie")
     parser.add_argument("--bili-jct", help="bili_jct cookie")
-    parser.add_argument("--skip-coin", action="store_true", help="跳过投币任务（不消耗硬币）")
-    parser.add_argument("--coin", type=int, default=5, help="投币数量（默认5枚=50EXP，每枚消耗1硬币）")
+    parser.add_argument("--skip-coin", action="store_true", default=True, help="跳过投币任务（默认跳过，硬币不好获得）")
+    parser.add_argument("--coin", type=int, default=5, help="投币数量（默认5枚=50EXP，需配合 --do-coin 使用）")
+    parser.add_argument("--do-coin", action="store_true", help="启用投币任务（每枚消耗1硬币）")
     parser.add_argument("--status", action="store_true", help="仅查看当前任务状态")
     parser.add_argument("--json", action="store_true", help="JSON 格式输出")
 
@@ -454,7 +455,8 @@ def main():
             print(f"  🪙 投币：{coins}/50 EXP")
         return
 
-    result = run_all(sessdata, bili_jct, skip_coin=args.skip_coin, coin_count=args.coin)
+    skip_coin = not args.do_coin
+    result = run_all(sessdata, bili_jct, skip_coin=skip_coin, coin_count=args.coin)
 
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))

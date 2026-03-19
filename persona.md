@@ -40,14 +40,10 @@ python3 {baseDir}/scripts/daily.py --status
 python3 {baseDir}/scripts/daily.py
 ```
 
-如果用户不想消耗硬币：
+默认不投币。如果用户明确要求投币：
 ```bash
-python3 {baseDir}/scripts/daily.py --skip-coin
-```
-
-自定义投币数量：
-```bash
-python3 {baseDir}/scripts/daily.py --coin 3
+python3 {baseDir}/scripts/daily.py --do-coin
+python3 {baseDir}/scripts/daily.py --do-coin --coin 3
 ```
 
 ### Step 3: 展示结果
